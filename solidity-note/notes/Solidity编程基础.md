@@ -1,6 +1,11 @@
 * 合约结构
   * 合约的基本结构
   * 构造函数
+  * 访问控制修饰符
+* Solidity语法
+  * 数据类型，变量和常量
+  * 
+
 
 
 
@@ -101,4 +106,159 @@ contract SimpleStorage {
 ```
 
 在上述例子中，合约 `SimpleStorage` 的构造函数在部署时将 `data` 初始化为 42。构造函数是 Solidity 中非常重要的一个概念，它使得在合约创建时能够执行必要的初始化步骤。
+
+
+
+##### 访问控制修饰符
+
+访问控制修饰符的主要作用是定义合约中函数的访问权限，以确保合约中的各个函数被正确地调用和使用。通过使用这些修饰符，开发者可以控制哪些部分的合约对外是可见的、可调用的，哪些是仅限内部或外部调用的。以下是一些常见的访问控制修饰符：
+
+1. **`public`：** 默认的状态，所有函数都是公共的，可以被外部调用。
+
+   ```solidity
+   function myFunction() public {
+       // 可被外部调用
+   }
+   ```
+
+2. **`external`：** 表示函数只能从合约外部调用，不能被合约内部的其他函数调用。
+
+   ```solidity
+   function myFunction() external {
+       // 只能被外部调用
+   }
+   ```
+
+3. **`internal`：** 表示函数只能在当前合约内部或继承合约中调用，不能被合约的外部调用。
+
+   ```solidity
+   function myFunction() internal {
+       // 只能在内部调用
+   }
+   ```
+
+4. **`private`：** 表示函数只能在当前合约内部调用，不能被继承合约中的函数调用。
+
+   ```solidity
+   function myFunction() private {
+       // 只能在内部调用
+   }
+   ```
+
+5. **`internal` 和 `external` 联合使用：** 在接口中使用 `external`，在实现中使用 `internal`。
+
+   ```solidity
+   // 接口
+   interface MyInterface {
+       function myFunction() external;
+   }
+   
+   // 实现
+   contract MyContract is MyInterface {
+       function myFunction() internal override {
+           // 实现接口中的函数
+       }
+   }
+   ```
+
+
+
+#### Solidity语法
+
+##### 数据类型，变量和常量
+
+在Solidity中，有各种数据类型、变量和常量。以下是一些常见的数据类型、变量和常量：
+
+###### 数据类型：
+
+###### 1. 整数类型 (`uint` 和 `int`):
+
+- **`uint` (无符号整数):** 用于存储非负整数，包括零。例如，`uint256` 表示一个256位的无符号整数。
+
+- **`int` (有符号整数):** 用于存储可以为正、负或零的整数。例如，`int32` 表示一个32位的有符号整数。
+
+```solidity
+uint256 positiveNumber = 42;
+int32 signedNumber = -10;
+```
+
+###### 2. 字节数组类型 (`bytes` 和 `string`):
+
+- **`bytes`:** 用于存储动态长度的字节数组。可以通过索引访问单个字节。
+
+- **`string`:** 用于存储字符串，以UTF-8编码。字符串长度可变。
+
+```solidity
+bytes dynamicBytes = "Hello, World!";
+string greeting = "Hello, Solidity!";
+```
+
+###### 3. 布尔类型 (`bool`):
+
+- **`bool`:** 用于存储真（`true`）或假（`false`）值。
+
+```solidity
+bool isTrue = true;
+bool isFalse = false;
+```
+
+###### 4. 地址类型 (`address`):
+
+- **`address`:** 用于存储以太坊地址。可以与其他地址进行交互，例如发送以太币或调用合约。
+
+```solidity
+address userAddress = 0x123...;
+```
+
+###### 5. 定点数类型 (`fixed` 和 `ufixed`):
+
+- **`fixed` 和 `ufixed`:** 用于存储定点数，即具有固定小数点位置的数值。
+
+```solidity
+fixed fNum = 3.14;
+ufixed ufNum = 2.718;
+```
+
+###### 6. 枚举类型 (`enum`):
+
+- **`enum`:** 用于创建一组有限的可能性，如状态或选项。
+
+```solidity
+enum Status {
+    Pending,
+    Approved,
+    Rejected
+}
+
+Status currentStatus = Status.Pending;
+```
+
+###### 7. Mapping 类型 (`mapping`):
+
+- **`mapping`:** 用于建立键值对映射，类似于字典或哈希表。
+
+```solidity
+mapping(address => uint256) balances;
+balances[0xabc...] = 100;
+```
+
+### 变量：
+
+变量是用于存储和操作数据的标识符。
+
+```solidity
+uint256 number;  // 无符号整数变量
+address owner;   // 地址变量
+string name;     // 字符串变量
+```
+
+### 常量：
+
+常量是在编译时固定的值，不能被修改。
+
+```solidity
+uint256 constant MAX_COUNT = 100;  // 常量
+address constant CREATOR = 0x123...;  // 地址常量
+string constant GREETING = "Hello";  // 字符串常量
+```
 
