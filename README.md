@@ -4,3 +4,6 @@
 
 [Solidity教程]((https://github.com/tign227/blockchain-note/blob/main/solidity-notes/README.md))
 
+黑客松信息
+
+公开课信息
